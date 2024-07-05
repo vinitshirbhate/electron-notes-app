@@ -5,6 +5,7 @@ import { ComponentProps } from 'react'
 export type NotesPreviewProps = NoteInfo & {
   isActive?: boolean
 } & ComponentProps<'div'>
+
 export const NotesPreview = ({
   title,
   content,
