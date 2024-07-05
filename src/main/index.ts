@@ -6,11 +6,13 @@ import icon from '../../resources/icon.png?asset'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    backgroundMaterial: 'tabbed',
     width: 900,
     height: 670,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
+    title: 'Notes App',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true,
