@@ -1,14 +1,31 @@
-import { Content, RootLayout, Sidebar, ActionButtonContainer, NotesPreviewList } from './components'
+import { useRef } from 'react'
+import {
+  Content,
+  RootLayout,
+  Sidebar,
+  ActionButtonContainer,
+  NotesPreviewList,
+  MarkdownEditor,
+  FloatingNoteTitle
+} from './components'
 
 const App = () => {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const resetScroll = () => {
+    scrollRef.current?.scrollTo(0, 0)
+  }
   return (
     <>
       <RootLayout>
         <Sidebar className="p-2">
           <ActionButtonContainer className="flex justify-between mt-1" />
-          <NotesPreviewList className="mt-3 space-y-1 " />
+          <NotesPreviewList className="mt-3 space-y-1 " onSelect={resetScroll} />
         </Sidebar>
-        <Content className="border-l bg-zinc-900/50 border-l-white/20">Content</Content>
+        <Content ref={scrollRef} className="border-l bg-zinc-900/50 border-l-white/20">
+          <FloatingNoteTitle className="pt-2" />
+          <MarkdownEditor />
+        </Content>
       </RootLayout>
     </>
   )
