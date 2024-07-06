@@ -1,4 +1,4 @@
-import { NoteInfo } from '@shared/Models'
+import { NoteContent, NoteInfo } from '@shared/Models'
 import { atom } from 'jotai'
 import { unwrap } from 'jotai/utils'
 
@@ -39,6 +39,28 @@ export const selectedNoteAtom = unwrap(
       content: ''
     }
 )
+
+export const saveNoteAtom = atom(null, async (get, set, newContent: NoteContent) => {
+  const notes = get(notesAtom)
+  const selectedNote = get(selectedNoteAtom)
+
+  if (!selectedNote || !notes) return
+
+  await window.context.writNotes(selectedNote.title, newContent)
+
+  set(
+    notesAtom,
+    notes.map((note) => {
+      if (note.title === selectedNote.title) {
+        return {
+          ...note,
+          lastEditTime: Date.now()
+        }
+      }
+      return note
+    })
+  )
+})
 
 export const createEmptyNoteAtom = atom(null, (get, set) => {
   const notes = get(notesAtom)

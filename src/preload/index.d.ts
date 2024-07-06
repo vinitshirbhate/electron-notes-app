@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { GetNotes, ReadNotes } from '@shared/types'
+import { GetNotes, ReadNotes, WriteNotes } from '@shared/types'
 
 declare global {
   interface Window {
@@ -8,6 +8,7 @@ declare global {
       locate: string
       getNoteDir: GetNotes
       readNotes: ReadNotes
+      writNotes: WriteNotes
     }
   }
 }
