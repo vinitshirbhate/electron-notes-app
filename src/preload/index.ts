@@ -1,5 +1,4 @@
-import { writNotes } from '@/lib'
-import { GetNotes, ReadNotes, WriteNotes } from '@shared/types'
+import { CreateNote, GetNotes, ReadNotes, WriteNotes } from '@shared/types'
 import { contextBridge, ipcRenderer } from 'electron'
 
 // Custom APIs for renderer
@@ -12,8 +11,9 @@ try {
     locate: navigator.language,
     getNoteDir: (...args: Parameters<GetNotes>) => ipcRenderer.invoke('getNoteDir', ...args),
     readNotes: (...args: Parameters<ReadNotes>) => ipcRenderer.invoke('readNotes', ...args),
-    writNotes: (...args: Parameters<WriteNotes>) => ipcRenderer.invoke('writeNotes', ...args)
+    writNotes: (...args: Parameters<WriteNotes>) => ipcRenderer.invoke('writeNotes', ...args),
+    createNotes: (...args: Parameters<CreateNote>) => ipcRenderer.invoke('createNotes', ...args)
   })
-} catch (error) {
-  console.error(error)
+} catch (error: any) {
+  console.error(error.message)
 }
