@@ -18,7 +18,7 @@ const App = () => {
   return (
     <>
       <RootLayout>
-        <Sidebar className="p-2">
+        <Sidebar className="p-2 border-t-slate-300">
           <ActionButtonContainer className="flex justify-between mt-1" />
           <NotesPreviewList className="mt-3 space-y-1 " onSelect={resetScroll} />
         </Sidebar>
